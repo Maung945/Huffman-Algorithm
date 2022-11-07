@@ -1,11 +1,13 @@
 #ifndef HUFFMAN_H_
 #define HUFFMAN_H_
+
 /**
 * Project Huffman Coding Algorithm Implementation using Priority Queue
 * Testing
 * Huffman.h
 * Copyright (c) 2022, Myo Aung.
 */
+
 #include <iostream>
 #include <queue>
 #include <iterator>
@@ -17,9 +19,9 @@ map<char, int> freqPair;
 map<char, string> codes;
 
 struct MinHeapNode {
-	char data;												// One of the input characters
-	int freq;												// Frequency of the character
-	MinHeapNode* left, * right;								// Left and right child
+	char data;															// One of the input characters
+	int freq;															// Frequency of the character
+	MinHeapNode* left, * right;											// Left and right child
 	MinHeapNode(char data, int freq) {
 		left = right = NULL;
 		this->data = data;
@@ -77,7 +79,6 @@ void HuffmanCodes(int size) {
 		minHeap.push(new MinHeapNode(itr->first, itr->second));
 	}
 	while (minHeap.size() != 1) {                                          // Iterate while size of heap doesn't become 1
-
 		left = minHeap.top();											   // Extract the two minimum freq items from min heap
 		minHeap.pop();
 		right = minHeap.top();
@@ -106,14 +107,13 @@ string decode_file(struct MinHeapNode* root, string s) {
 			curr = curr->left;
 		else
 			curr = curr->right;
-		// reached leaf node
-		if (curr->left == NULL && curr->right == NULL) {
+		
+		if (curr->left == NULL && curr->right == NULL) {					// reached leaf node
 			ans += curr->data;
 			curr = root;
 		}
 	}
-	// cout<<ans<<endl;
-	return ans + '\0';
+	return ans + '\0';														// cout<<ans<<endl;
 }
 
 void emptyPQ() {
